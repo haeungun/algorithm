@@ -9,7 +9,6 @@ public class PacificAtlantic {
 		if (visited[i][j]) return;
 		
 		visited[i][j] = true;
-		
 		int[][] dirs = {{-1,0},{1,0},{0,-1},{0,1}}; // up, down, left, right
 		for (int[] dir : dirs) {
 			int x = i + dir[0];
@@ -19,7 +18,6 @@ public class PacificAtlantic {
 				dfs(matrix, x, y, visited);
 			}
 		}
-		
 	}
 	
   	public static void bfs(Queue<int[]> queue, int[][] matrix, boolean[][] visited) {
@@ -42,7 +40,6 @@ public class PacificAtlantic {
 		   		}
 		   	}
 		 }
-			
 	}
 	
   	// solution 1: dfs
@@ -56,8 +53,7 @@ public class PacificAtlantic {
         
         	boolean[][] pacific = new boolean[m][n];
         	boolean[][] atlantic = new boolean[m][n];
-        
-        
+		
 		for (int i = 0; i < m; i++) {
 			dfs(matrix, i, 0, pacific);
 			dfs(matrix, i, n - 1, atlantic);        	
@@ -105,8 +101,7 @@ public class PacificAtlantic {
 			pQueue.add(new int[] {0, i});
 			aQueue.add(new int[] {m - 1, i});
 		}
-
-
+		
 		bfs(pQueue, matrix, pacific);
 		bfs(aQueue, matrix, atlantic);
 
