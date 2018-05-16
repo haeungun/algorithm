@@ -5,7 +5,6 @@
 import java.util.*;
 
 public class PacificAtlantic {
-  // solution 1: dfs
 	public static void dfs(int[][] matrix, int i, int j, boolean[][] visited) {
 		if (visited[i][j]) return;
 		
@@ -22,9 +21,8 @@ public class PacificAtlantic {
 		}
 		
 	}
-  
-  // solution 2: bfs 
-  public static void bfs(Queue<int[]> queue, int[][] matrix, boolean[][] visited) {
+	
+  	public static void bfs(Queue<int[]> queue, int[][] matrix, boolean[][] visited) {
 		 int m = matrix.length;
 		 int n = matrix[0].length;
 		 
@@ -47,34 +45,77 @@ public class PacificAtlantic {
 			
 	}
 	
+  	// solution 1: dfs
+	public static List<int[]> pacificAtlantic1(int[][] matrix) {
+    		List<int[]> ret = new ArrayList<>();
+        
+   		if (matrix.length < 1) return ret;
+        
+    		int m = matrix.length;
+    		int n = matrix[0].length;
+        
+        	boolean[][] pacific = new boolean[m][n];
+        	boolean[][] atlantic = new boolean[m][n];
+        
+        
+		for (int i = 0; i < m; i++) {
+			dfs(matrix, i, 0, pacific);
+			dfs(matrix, i, n - 1, atlantic);        	
+		}
+
+		for (int i = 0; i < n; i++) {
+			dfs(matrix, 0, i, pacific);
+			dfs(matrix, m - 1, i, atlantic);  
+		}
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (pacific[i][j] && atlantic[i][j]) ret.add(new int[] {i, j});
+			}
+		}
+
+		return ret;
+    	}
+  
+  	// solution 2: bfs 
 	public static List<int[]> pacificAtlantic(int[][] matrix) {
-    List<int[]> ret = new ArrayList<>();
-        
-    if (matrix.length < 1) return ret;
-        
-    int m = matrix.length;
-    int n = matrix[0].length;
-        
-        boolean[][] pacific = new boolean[m][n];
-        boolean[][] atlantic = new boolean[m][n];
-        
-        
-        for (int i = 0; i < m; i++) {
-        	dfs(matrix, i, 0, pacific);
-        	dfs(matrix, i, n - 1, atlantic);        	
-        }
-        
-        for (int i = 0; i < n; i++) {
-        	dfs(matrix, 0, i, pacific);
-        	dfs(matrix, m - 1, i, atlantic);  
-        }
-        
-        for (int i = 0; i < m; i++) {
-        	for (int j = 0; j < n; j++) {
-        		if (pacific[i][j] && atlantic[i][j]) ret.add(new int[] {i, j});
-        	}
-        }
-        
-        return ret;
-    }
+		List<int[]> ret = new ArrayList<>();
+	        
+	    	if (matrix.length < 1) return ret;
+	        
+		int m = matrix.length;
+		int n = matrix[0].length;
+
+		boolean[][] pacific = new boolean[m][n];
+		boolean[][] atlantic = new boolean[m][n];
+
+		Queue<int[]> pQueue = new LinkedList<>();
+		Queue<int[]> aQueue = new LinkedList<>();
+
+		for (int i = 0; i < m; i++) {
+			pacific[i][0] = true;
+			atlantic[i][n - 1] = true;
+			pQueue.add(new int[] {i, 0});
+			aQueue.add(new int[] {i, n - 1});
+		}
+
+		for (int i = 0; i < n; i++) {
+			pacific[0][i] = true;
+			atlantic[m - 1][i] = true;
+			pQueue.add(new int[] {0, i});
+			aQueue.add(new int[] {m - 1, i});
+		}
+
+
+		bfs(pQueue, matrix, pacific);
+		bfs(aQueue, matrix, atlantic);
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (pacific[i][j] && atlantic[i][j]) ret.add(new int[] {i, j});
+			}
+		}
+	        
+	    	return ret;
+	}
 }
