@@ -1,7 +1,11 @@
+/**
+ * https://algospot.com/judge/problem/read/TRIANGLEPATH
+ */
+
 import java.util.*;
 
-
 public class Main {
+	
 	public static int trianglePath(int[][] triangle) {
 		int n = triangle.length;
 		int[] path = new int[n];
