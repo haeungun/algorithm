@@ -26,8 +26,8 @@ public class NumberGame {
 		if (left - right == 0) { // 게임판에 남은 숫자가 1개 일떄
 			scores[left][right] = game[left];
 		} else {	
-      // 1. 숫자를 가져가거나(왼쪽, 오른쪽)
-      // 2. 숫자를 지우거나(왼쪽, 오른쪽)
+      			// 1. 숫자를 가져가거나(왼쪽, 오른쪽)
+      			// 2. 숫자를 지우거나(왼쪽, 오른쪽)
 			int choice1 = Math.max(game[left] - numberGame(left + 1, right), game[right] - numberGame(left, right - 1));
 			int choice2 = Math.max(-numberGame(left + 2, right), -numberGame(left, right - 2));
 			scores[left][right] = Math.max(choice1, choice2);
