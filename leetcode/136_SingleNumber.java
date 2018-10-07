@@ -16,8 +16,6 @@ class Solution1 {
         int m = 0;
         while (l < r) {
             m = (l + r) / 2;
-            System.out.println(l + "," + r);
-            System.out.println(m + "->" + nums[m]);
             if (m % 2 == 0) {
                 if (nums[m] == nums[m - 1]) {
                     r = m;
