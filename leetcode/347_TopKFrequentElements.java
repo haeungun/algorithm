@@ -27,9 +27,8 @@ class Solution {
         }
         
         List<Counter> counters = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) 
             counters.add(new Counter(e.getKey(), e.getValue()));
-        }
         
         Collections.sort(counters);
         for (int i = 0; i < k; i++) 
