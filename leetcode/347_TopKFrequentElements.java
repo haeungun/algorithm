@@ -21,10 +21,8 @@ class Solution {
         List<Integer> result = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
         
-        for (int num : nums) {
-            int n = map.getOrDefault(num, 0);
-            map.put(num, ++n);
-        }
+        for (int num : nums) 
+            map.put(num, ++map.getOrDefault(num, 0));
         
         List<Counter> counters = new ArrayList<>();
         for (Map.Entry<Integer, Integer> e : map.entrySet()) 
